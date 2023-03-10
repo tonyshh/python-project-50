@@ -1,6 +1,7 @@
 import argparse
 import json
 
+
 def parseargs():
     '''
     Получает аргументы, сравнивает файлы и возвращает различия
@@ -18,8 +19,10 @@ def parseargs():
         default='plain',
         # choices=['plain', 'json']
     )
-   # options = parser.parse_args()
+    options = parser.parse_args()
     args = vars(options).values()
+    print(generate_diff(*args))
+
 
 def get_diff_for_key(dict1, dict2, key):
     '''
@@ -60,7 +63,8 @@ def generate_diff(file_path1, file_path2, format='plain'):
         )
     result_list = list(map(lambda x: f'{x[0]} {x[1]}: {x[2]}', result_list))
     result = '{\n  ' + '\n  '.join(result_list) + '\n}'
-    print result
+    
+    return result
 
 
 def main():
