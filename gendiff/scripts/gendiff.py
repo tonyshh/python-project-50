@@ -33,15 +33,14 @@ def get_diff_for_key(dict1, dict2, key):
     arg1 = dict1.get(key)
     arg2 = dict2.get(key)
     if arg1 is None:
-        return [('+', key, arg2),]
+        return [('+', key, arg2), ]
     if arg2 is None:
-        return [('-', key, arg1),]
+        return [('-', key, arg1), ]
     if arg1 == arg2:
-        return [(' ', key, arg1),]
+        return [(' ', key, arg1), ]
     else:
         return [('-', key, arg1),
                 ('+', key, arg2)]
-
 
 
 def generate_diff(file_path1, file_path2, format='plain'):
@@ -63,13 +62,13 @@ def generate_diff(file_path1, file_path2, format='plain'):
         )
     result_list = list(map(lambda x: f'{x[0]} {x[1]}: {x[2]}', result_list))
     result = '{\n  ' + '\n  '.join(result_list) + '\n}'
-    
+
     return result
 
 
 def main():
     parseargs()
 
-    
+
 if __name__ == '__main__':
     main()
