@@ -3,8 +3,8 @@ import json
 
 
 def generate_diff(file_path1, file_path2):
-    file1_data = json.load(open(file_path1))
-    file2_data = json.load(open(file_path2))
+    file1_data = json.load(open('tests/fixtures/file1.json'))
+    file2_data = json.load(open('tests/fixtures/file2.json'))
 
     diff = []
     all_keys = sorted(file1_data.keys() | file2_data.keys())
