@@ -3,8 +3,9 @@ import json
 
 
 def generate_diff(file_path1, file_path2):
-    file1_data = json.load(open('tests/fixtures/file1.json'))
-    file2_data = json.load(open('tests/fixtures/file2.json'))
+    with open(file_path1) as file1, open(file_path2) as file2:
+        file1_data = json.load(file1)
+        file2_data = json.load(file2)
 
     diff = []
     all_keys = sorted(file1_data.keys() | file2_data.keys())
@@ -22,15 +23,21 @@ def generate_diff(file_path1, file_path2):
 
     return '{\n' + '\n'.join(diff) + '\n}'
 
+
 def main():
-    parser = argparse.ArgumentParser(description='Compares two configuration files and shows a difference.')
-    parser.add_argument('first_file', help='first configuration file')
-    parser.add_argument('second_file', help='second configuration file')
-    parser.add_argument('-f', '--format', help='set format of output', default='stylish')
+    parser = argparse.ArgumentParser(
+        description='Compares two configuration files and shows a difference.'
+    )
+    parser.add_argument('first_file', type=str, help='first configuration file')
+    parser.add_argument('second_file', type=str,
+                        help='second configuration file')
+    parser.add_argument('-f', '--format', help='set format of output',
+                        default='stylish')
 
     args = parser.parse_args()
     diff = generate_diff(args.first_file, args.second_file)
     print(diff)
+
 
 if __name__ == '__main__':
     main()
