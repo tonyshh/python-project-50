@@ -17,10 +17,8 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 gendiff = "hexlet_code.gendiff:main"
+test_gendiff = "test.test_gendiff:main"
 
-packages = [
-  { include = "gendiff" },
-]
 
 
 
