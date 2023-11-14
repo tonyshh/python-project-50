@@ -14,12 +14,12 @@ def file2_path():
 
 def test_generate_diff(file1_path, file2_path):
     correct_result = '''{
-  - follow: False
+  - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
   - timeout: 50
   + timeout: 20
-  + verbose: True
+  + verbose: true
 }'''
 
     result = generate_diff(file1_path, file2_path)
@@ -28,11 +28,11 @@ def test_generate_diff(file1_path, file2_path):
 
 @pytest.fixture
 def file1_yaml_path():
-    return 'tests/fixtures/file1.yml'
+    return 'tests/fixtures/file1.yaml'
 
 @pytest.fixture
 def file2_yaml_path():
-    return 'tests/fixtures/file2.yml'
+    return 'tests/fixtures/file2.yaml'
 
 def test_generate_diff_yaml(file1_yaml_path, file2_yaml_path):
     correct_result_yaml = '''{
