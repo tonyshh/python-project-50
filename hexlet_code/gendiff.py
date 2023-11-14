@@ -1,12 +1,15 @@
+import os
 import argparse
-import json
+from hexlet_code.parsers import parse
 
 
 def generate_diff(file_path1, file_path2):
-    with open(file_path1) as file1, open(file_path2) as file2:
-        file1_data = json.load(file1)
-        file2_data = json.load(file2)
+    format1 = os.path.splitext(file_path1)[1][1:]  # получаем расширение файла без точки
+    format2 = os.path.splitext(file_path2)[1][1:]  # получаем расширение файла без точки
 
+    with open(file_path1) as file1, open(file_path2) as file2:
+        file1_data = parse(file1.read(), format1)
+        file2_data = parse(file2.read(), format2)
     diff = []
     all_keys = sorted(file1_data.keys() | file2_data.keys())
 
