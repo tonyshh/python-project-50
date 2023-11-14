@@ -4,8 +4,8 @@ from hexlet_code.parsers import parse
 
 
 def generate_diff(file_path1, file_path2):
-    format1 = os.path.splitext(file_path1)[1][1:]  # получаем расширение файла без точки
-    format2 = os.path.splitext(file_path2)[1][1:]  # получаем расширение файла без точки
+    format1 = os.path.splitext(file_path1)[1][1:]  
+    format2 = os.path.splitext(file_path2)[1][1:]  
 
     with open(file_path1) as file1, open(file_path2) as file2:
         file1_data = parse(file1.read(), format1)
