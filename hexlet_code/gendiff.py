@@ -26,9 +26,13 @@ def generate_diff(file_path1, file_path2):
         file2_data = parse(file2.read(), format2)
 
     diff = build_diff(file1_data, file2_data)
-    formatted_diff = format_diff(diff) 
+    formatted_diff = format_diff(diff)  # Форматирование диффа
     return formatted_diff
 
+def choose_formatter(format_name):
+    if format_name == 'stylish':
+        return format_diff 
+    raise ValueError(f"Unknown format: {format_name}")
     
 
 
@@ -37,14 +41,16 @@ def main():
         description='Compares two configuration files and shows a difference.'
     )
     parser.add_argument('first_file', type=str, help='first configuration file')
-    parser.add_argument('second_file', type=str,
-                        help='second configuration file')
-    parser.add_argument('-f', '--format', help='set format of output',
-                        default='stylish')
+    parser.add_argument('second_file', type=str, help='second configuration file')
+    parser.add_argument('-f', '--format', help='set format of output', default='stylish')
 
     args = parser.parse_args()
-    diff = generate_diff(args.first_file, args.second_file)
-    print(diff)
+    formatter = choose_formatter(args.format)  # Эта строка больше не нужна, если generate_diff возвращает готовую строку
+    formatted_diff = generate_diff(args.first_file, args.second_file)
+    print(formatted_diff)
+
+if __name__ == '__main__':
+    main()
 
 
 if __name__ == '__main__':
