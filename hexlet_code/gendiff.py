@@ -1,6 +1,8 @@
 import os
 import argparse
 from hexlet_code.parsers import parse
+from hexlet_code.diff_builder import build_diff
+from hexlet_code.stylish import format_diff
 
 
 def to_string(value):
@@ -8,6 +10,12 @@ def to_string(value):
         return str(value).lower()
     return value
 
+
+import os
+import argparse
+from hexlet_code.parsers import parse
+from hexlet_code.diff_builder import build_diff
+from hexlet_code.stylish import format_diff
 
 def generate_diff(file_path1, file_path2):
     format1 = os.path.splitext(file_path1)[1][1:]
@@ -17,21 +25,11 @@ def generate_diff(file_path1, file_path2):
         file1_data = parse(file1.read(), format1)
         file2_data = parse(file2.read(), format2)
 
-    diff = []
-    all_keys = sorted(file1_data.keys() | file2_data.keys())
+    diff = build_diff(file1_data, file2_data)
+    formatted_diff = format_diff(diff) 
+    return formatted_diff
 
-    for key in all_keys:
-        if key in file1_data and key not in file2_data:
-            diff.append(f"  - {key}: {to_string(file1_data[key])}")
-        elif key not in file1_data and key in file2_data:
-            diff.append(f"  + {key}: {to_string(file2_data[key])}")
-        elif file1_data[key] == file2_data[key]:
-            diff.append(f"    {key}: {to_string(file1_data[key])}")
-        else:
-            diff.append(f"  - {key}: {to_string(file1_data[key])}")
-            diff.append(f"  + {key}: {to_string(file2_data[key])}")
-
-    return '{\n' + '\n'.join(diff) + '\n}'
+    
 
 
 def main():
