@@ -30,9 +30,11 @@ def test_generate_diff(file1_path, file2_path):
 def file1_yaml_path():
     return 'tests/fixtures/file1.yaml'
 
+
 @pytest.fixture
 def file2_yaml_path():
     return 'tests/fixtures/file2.yaml'
+
 
 def test_generate_diff_yaml(file1_yaml_path, file2_yaml_path):
     correct_result_yaml = '''{

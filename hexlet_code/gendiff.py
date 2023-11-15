@@ -8,6 +8,7 @@ def to_string(value):
         return str(value).lower()
     return value
 
+
 def generate_diff(file_path1, file_path2):
     format1 = os.path.splitext(file_path1)[1][1:]
     format2 = os.path.splitext(file_path2)[1][1:]
@@ -31,7 +32,6 @@ def generate_diff(file_path1, file_path2):
             diff.append(f"  + {key}: {to_string(file2_data[key])}")
 
     return '{\n' + '\n'.join(diff) + '\n}'
-
 
 
 def main():
