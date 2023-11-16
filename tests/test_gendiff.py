@@ -6,9 +6,11 @@ from hexlet_code.gendiff import generate_diff
 def nested_file1_path():
     return 'tests/fixtures/file1.json'
 
+
 @pytest.fixture
 def nested_file2_path():
     return 'tests/fixtures/file2.json'
+
 
 def test_generate_diff_nested(nested_file1_path, nested_file2_path):
     correct_result = '''{
