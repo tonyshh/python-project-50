@@ -2,9 +2,9 @@ import os
 import argparse
 from hexlet_code.parsers import parse
 from hexlet_code.diff_builder import build_diff
-from hexlet_code.stylish import format_diff
-from hexlet_code.plain import format_plain
-
+from hexlet_code.formatters.plain import format_plain
+from hexlet_code.formatters.stylish import format_stylish
+from hexlet_code.formatters.plain import format_plain
 
 def generate_diff(file_path1, file_path2, format_name='stylish'):
     format1 = os.path.splitext(file_path1)[1][1:]
@@ -17,11 +17,13 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
     diff = build_diff(file1_data, file2_data)
 
     if format_name == 'stylish':
-        return format_diff(diff)
+        return format_stylish(diff)
     elif format_name == 'plain':
         return format_plain(diff)
     else:
         raise ValueError(f"Unknown format: {format_name}")
+
+
 
 
 def main():

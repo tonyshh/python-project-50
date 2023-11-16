@@ -5,11 +5,11 @@
 INDENT = '    '
 
 
-def format_diff(diff, depth=0):
+def format_stylish(diff, depth=0):
     lines = []
     for key, (status, value) in diff.items():
         if status == 'nested':
-            formatted_value = format_diff(value, depth + 1)
+            formatted_value = format_stylish(value, depth + 1)
             line = f"{INDENT * depth}    {key}: {formatted_value}"
         else:
             line = format_value(key, status, value, depth)
