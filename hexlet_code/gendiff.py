@@ -5,6 +5,7 @@ from hexlet_code.diff_builder import build_diff
 from hexlet_code.formatters.plain import format_plain
 from hexlet_code.formatters.stylish import format_stylish
 from hexlet_code.formatters.plain import format_plain
+from hexlet_code.formatters.json import format_json
 
 def generate_diff(file_path1, file_path2, format_name='stylish'):
     format1 = os.path.splitext(file_path1)[1][1:]
@@ -20,9 +21,10 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
         return format_stylish(diff)
     elif format_name == 'plain':
         return format_plain(diff)
+    elif format_name == 'json':
+        return format_json(diff)
     else:
         raise ValueError(f"Unknown format: {format_name}")
-
 
 
 
