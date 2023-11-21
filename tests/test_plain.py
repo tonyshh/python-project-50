@@ -1,29 +1,36 @@
 import pytest
-from hexlet_code.gendiff import generate_diff
+from gendiff.formatters.plain import format_diff_plain, to_str
+from .test_utils import get_expected_result
+from .test_utils import get_input_data
+
+
+@pytest.mark.parametrize('input_value, expected_value', [
+    ("hello", "'hello'"),
+    (42, "42"),
+    (3.14, "3.14"),
+    (True, "true"),
+    (False, "false"),
+    (None, "null"),
+    ({"key": "value"}, "[complex value]"),
+    ([1, 2, 3], "[complex value]"),
+    ([1, [2, 3], 4], "[complex value]"),
+    ({"key": {"nested_key": "value"}}, "[complex value]"),
+    ([], "[complex value]"),
+    ({}, "[complex value]")
+])
+def test_to_str(input_value, expected_value):
+    assert to_str(input_value) == expected_value
+
 
 @pytest.fixture
-def file1_path():
-    return 'tests/fixtures/file1.json'
+def input_diff():
+    return get_input_data('input_diff.json')
+
 
 @pytest.fixture
-def file2_path():
-    return 'tests/fixtures/file2.json'
-
-def test_generate_diff_plain(file1_path, file2_path):
-    expected_output = (
-        "Property 'common.follow' was added with value: false\n"
-        "Property 'common.setting2' was removed\n"
-        "Property 'common.setting3' was updated. From true to none\n"  
-        "Property 'common.setting4' was added with value: 'blah blah'\n"
-        "Property 'common.setting5' was added with value: [complex value]\n"
-        "Property 'common.setting6.doge.wow' was updated. From '' to 'so much'\n"
-        "Property 'common.setting6.ops' was added with value: 'vops'\n"
-        "Property 'group1.baz' was updated. From 'bas' to 'bars'\n"
-        "Property 'group1.nest' was updated. From [complex value] to 'str'\n"
-        "Property 'group2' was removed\n"
-        "Property 'group3' was added with value: [complex value]"
-)
+def expected_result():
+    return get_expected_result('exp_plain.txt')
 
 
-    result = generate_diff(file1_path, file2_path, 'plain')
-    assert result == expected_output
+def test_format_diff_plain(input_diff, expected_result):
+    assert format_diff_plain(input_diff) == expected_result

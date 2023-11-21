@@ -1,7 +1,18 @@
-from hexlet_code.gendiff import generate_diff
-import json
+import pytest
+from gendiff.formatters.json import format_diff_json
+from .test_utils import get_expected_result
+from .test_utils import get_input_data
 
-def test_generate_diff_json(file1_path, file2_path):
-    result = generate_diff(file1_path, file2_path, 'json')
-    
-    assert json.loads(result) is not None
+
+@pytest.fixture
+def input_diff():
+    return get_input_data('input_diff.json')
+
+
+@pytest.fixture
+def expected_result():
+    return get_expected_result('exp_json.txt')
+
+
+def test_format_diff_json(input_diff, expected_result):
+    assert format_diff_json(input_diff) == expected_result
